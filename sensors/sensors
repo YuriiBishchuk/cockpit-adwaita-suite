@@ -1,0 +1,96 @@
+#!/usr/bin/env python3
+import os, sys, json, glob
+
+def read_file(path, default=""):
+    try:
+        with open(path, "r") as f:
+            return f.read().strip()
+    except Exception:
+        return default
+
+FRIENDLY_CHIPS = {
+    "k10temp": "AMD CPU (Processor)",
+    "coretemp": "Intel CPU (Processor)",
+    "nvme": "NVMe SSD (System Storage)",
+    "amdgpu": "AMD Radeon GPU (Graphics)",
+    "iwlwifi_1": "Wi-Fi (Wireless Adapter)",
+    "iwlwifi": "Wi-Fi (Wireless Adapter)"
+}
+
+PRIORITY = {
+    "AMD CPU (Processor)": 1,
+    "Intel CPU (Processor)": 1,
+    "NVMe SSD (System Storage)": 2,
+    "AMD Radeon GPU (Graphics)": 3,
+    "Wi-Fi (Wireless Adapter)": 4
+}
+
+FRIENDLY_LABELS = {
+    "Tctl": "CPU Temp (Tctl)",
+    "Tdie": "Die Temp (Tdie)",
+    "Composite": "Overall Temp",
+    "Sensor 1": "Memory Controller",
+    "Sensor 2": "Flash NAND Storage",
+    "edge": "GPU Edge Temp",
+    "junction": "GPU Hotspot",
+    "temp1": "Core Temp"
+}
+
+def get_sensors():
+    raw_chips = {}
+    for h in sorted(glob.glob("/sys/class/hwmon/hwmon*")):
+        raw_name = read_file(f"{h}/name", os.path.basename(h))
+        chip_title = FRIENDLY_CHIPS.get(raw_name, raw_name.upper())
+        chip_data = {"Adapter": "Hardware Sensor"}
+        
+        # Collect temps
+        temp_inputs = sorted(glob.glob(f"{h}/temp*_input"))
+        for t_in in temp_inputs:
+            base = t_in[:-6] # e.g. temp1
+            idx = os.path.basename(base)
+            raw_label = read_file(f"{base}_label", idx)
+            friendly_label = FRIENDLY_LABELS.get(raw_label, raw_label)
+            val_raw = read_file(t_in)
+            if not val_raw:
+                continue
+            try:
+                val = round(float(val_raw) / 1000.0, 1)
+            except ValueError:
+                continue
+            
+            sensor_obj = {f"{idx}_input": val}
+            crit = read_file(f"{base}_crit")
+            if crit:
+                try:
+                    c_val = round(float(crit) / 1000.0, 1)
+                    if c_val < 150: sensor_obj[f"{idx}_crit"] = c_val
+                except ValueError: pass
+            max_v = read_file(f"{base}_max")
+            if max_v:
+                try:
+                    m_val = round(float(max_v) / 1000.0, 1)
+                    if m_val < 150: sensor_obj[f"{idx}_max"] = m_val
+                except ValueError: pass
+                
+            chip_data[friendly_label] = sensor_obj
+            
+        raw_chips[chip_title] = chip_data
+
+    sorted_items = sorted(raw_chips.items(), key=lambda x: PRIORITY.get(x[0], 99))
+    return dict(sorted_items)
+
+if __name__ == "__main__":
+    sensors = get_sensors()
+    if "-j" in sys.argv or "--json" in sys.argv:
+        print(json.dumps(sensors, ensure_ascii=False, indent=2))
+    else:
+        for chip, contents in sensors.items():
+            print(chip)
+            print("Adapter: " + contents.get("Adapter", "Unknown"))
+            for key, val in contents.items():
+                if key == "Adapter": continue
+                if isinstance(val, dict):
+                    in_val = [v for k, v in val.items() if k.endswith("_input")]
+                    if in_val:
+                        print(f"  {key}: +{in_val[0]:.1f}°C")
+            print()

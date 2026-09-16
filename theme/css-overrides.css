@@ -1,0 +1,258 @@
+/* 
+    Cockpit Modern Desktop Theme (Adwaita / Material Dark)
+    Official CSS Overrides Hook for Cockpit on openSUSE Leap Micro / Fedora.
+    Harmonized with Cockpit Files (Navigator) & Sensors palette.
+*/
+
+:root {
+    /* Adwaita Dark Palette */
+    --adwaita-bg-dark: #121215;
+    --adwaita-bg-main: #16161a;
+    --adwaita-card-bg: #202026;
+    --adwaita-card-hover: #272731;
+    --adwaita-border: rgba(255, 255, 255, 0.09);
+    --adwaita-blue: #3584e4;
+    --adwaita-blue-active: #226bcf;
+    --adwaita-blue-light: #70a5eb;
+    --adwaita-font: #f1f5f9;
+    --adwaita-font-muted: #94a3b8;
+
+    /* Cockpit Shell Color Variables */
+    --ct-color-host-accent: var(--adwaita-blue) !important;
+    --ct-topnav-background: var(--adwaita-bg-dark) !important;
+    --ct-color-bg: var(--adwaita-bg-main) !important;
+    --ct-color-nav-menu: var(--adwaita-bg-dark) !important;
+    --ct-color-border: var(--adwaita-border) !important;
+    --ct-color-text: var(--adwaita-font) !important;
+    --ct-color-link: var(--adwaita-blue) !important;
+    --ct-color-link-hover-bg: rgba(53, 132, 228, 0.15) !important;
+    --ct-color-nav-highlight: var(--adwaita-blue) !important;
+    --ct-color-nav-highlight-text: #ffffff !important;
+    --ct-color-list-hover-bg: rgba(255, 255, 255, 0.04) !important;
+    --ct-color-list-selected-bg: rgba(53, 132, 228, 0.2) !important;
+
+    /* PatternFly Brand & Background Overrides */
+    --color-primary: var(--adwaita-blue-active);
+    --color-primary-active: var(--adwaita-blue);
+
+    --pf-global--BackgroundColor--dark-100: var(--adwaita-bg-dark);
+    --pf-global--BackgroundColor--light-100: var(--adwaita-card-bg);
+    --pf-global--primary-color--100: var(--adwaita-blue);
+    --pf-global--BorderColor--100: var(--adwaita-border);
+
+    /* PatternFly v5/v6 Tokens */
+    --pf-t--global--color--brand--default: var(--adwaita-blue) !important;
+    --pf-t--global--color--brand--100: var(--adwaita-blue) !important;
+    --pf-t--global--color--brand--200: var(--adwaita-blue-active) !important;
+    --pf-t--global--color--brand--300: var(--adwaita-blue-active) !important;
+    --pf-t--global--color--brand--hover: var(--adwaita-blue-light) !important;
+    --pf-t--global--text--color--link--100: var(--adwaita-blue) !important;
+    --pf-t--global--text--color--link--200: var(--adwaita-blue-active) !important;
+    --pf-t--global--dark--color--brand--100: var(--adwaita-blue-light) !important;
+    --pf-t--global--dark--color--brand--200: var(--adwaita-blue) !important;
+    --pf-t--global--dark--color--brand--300: var(--adwaita-blue-active) !important;
+
+    --pf-t--global--background--color--primary--default: var(--adwaita-bg-main);
+    --pf-t--global--background--color--secondary--default: var(--adwaita-card-bg);
+    --pf-t--global--background--color--floating--default: var(--adwaita-card-bg);
+    --pf-t--global--border--color--default: var(--adwaita-border);
+    --pf-t--global--text--color--regular: var(--adwaita-font);
+    --pf-t--global--text--color--subtle: var(--adwaita-font-muted);
+}
+
+/* Dark Theme Adjustments */
+.pf-v6-theme-dark {
+    --pf-t--global--color--brand--hover: var(--adwaita-blue-light) !important;
+    --pf-t--global--text--color--brand--default: var(--adwaita-blue-light) !important;
+    --pf-v6-c-page__main-container--BackgroundColor: var(--adwaita-bg-main) !important;
+}
+
+/* Sidebar & Header Navigation */
+.sidebar, #hosts-sel, #topnav, #sidebar-toggle {
+    background-color: var(--adwaita-bg-dark) !important;
+}
+
+.page {
+    background: var(--adwaita-bg-dark) !important;
+}
+
+@media (min-width: 768px) {
+    .page {
+        background: linear-gradient(to bottom, var(--adwaita-blue), var(--adwaita-blue) 3px, var(--adwaita-bg-dark) 3px) !important;
+    }
+}
+
+/* Nav Menu Items */
+#nav-system .pf-v6-c-nav, 
+#hosts-sel .pf-v6-c-menu-toggle, 
+#topnav .pf-v6-c-menu-toggle, 
+#sidebar-toggle .ct-nav-toggle {
+    --pf-t--global--text--color--regular: var(--adwaita-font) !important;
+    --pf-t--global--text--color--subtle: var(--adwaita-font-muted) !important;
+    --pf-v6-c-nav__link--m-current--Color: #ffffff !important;
+    --pf-v6-c-nav__link--hover--Color: #ffffff !important;
+    --pf-v6-c-menu-toggle--m-plain--Color: var(--adwaita-font) !important;
+    --pf-t--global--icon--color--regular: var(--adwaita-font-muted) !important;
+}
+
+/* Active navigation link in sidebar */
+#nav-system .pf-v6-c-nav__link.pf-m-current,
+.page .sidebar .pf-v6-c-nav__link.pf-m-current,
+.page .sidebar .pf-c-nav__link.pf-m-current {
+    background-color: rgba(53, 132, 228, 0.16) !important;
+    color: #ffffff !important;
+    border-left: 3px solid var(--adwaita-blue) !important;
+    border-radius: 0 6px 6px 0 !important;
+}
+
+/* Sidebar Search Input */
+#nav-system input[type="search"],
+.page .sidebar input {
+    background-color: #1c1c22 !important;
+    border: 1px solid var(--adwaita-border) !important;
+    color: var(--adwaita-font) !important;
+    border-radius: 8px !important;
+    outline: none !important;
+}
+
+#nav-system input[type="search"]:focus,
+.page .sidebar input:focus {
+    border-color: var(--adwaita-blue) !important;
+    box-shadow: 0 0 0 1px var(--adwaita-blue) !important;
+}
+
+/* Super User Badge */
+#super-user-indicator .pf-v6-c-button.ct-unlocked {
+    --pf-v6-c-button--Color: var(--adwaita-blue-light) !important;
+}
+
+/* Main Container */
+.pf-v6-c-page__main-container {
+    background: var(--adwaita-bg-main) !important;
+}
+
+/* Card Elements */
+.pf-v6-c-card, .pf-c-card {
+    background-color: var(--adwaita-card-bg) !important;
+    border: 1px solid var(--adwaita-border) !important;
+    border-radius: 12px !important;
+}
+
+/* Usage progress bars */
+.usage-bar {
+    --bg-color: var(--adwaita-blue) !important;
+}
+
+/* Typography & Global Font */
+body, .page, #topnav, #nav-system, .pf-v6-c-page {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+/* Card Elevation & High-Fidelity Borders */
+.pf-v6-c-card, .pf-c-card {
+    background-color: var(--adwaita-card-bg) !important;
+    border: 1px solid var(--adwaita-border) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.pf-v6-c-card:hover, .pf-c-card:hover {
+    border-color: rgba(255, 255, 255, 0.14) !important;
+}
+
+.pf-v6-c-card__header, .pf-c-card__header,
+.pf-v6-c-card__title, .pf-c-card__title,
+.pf-v6-c-title, .pf-c-title {
+    color: var(--adwaita-font) !important;
+    font-weight: 600 !important;
+}
+
+/* Adwaita Buttons */
+.pf-v6-c-button.pf-m-secondary, .pf-c-button.pf-m-secondary,
+.pf-v6-c-button.pf-m-control, .pf-c-button.pf-m-control {
+    background: #272731 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: var(--adwaita-font) !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+}
+
+.pf-v6-c-button.pf-m-secondary:hover, .pf-c-button.pf-m-secondary:hover,
+.pf-v6-c-button.pf-m-control:hover, .pf-c-button.pf-m-control:hover {
+    background: #32323f !important;
+    border-color: var(--adwaita-blue) !important;
+    color: #ffffff !important;
+}
+
+.pf-v6-c-button.pf-m-primary, .pf-c-button.pf-m-primary {
+    background: var(--adwaita-blue) !important;
+    border: 1px solid var(--adwaita-blue) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    transition: all 0.15s ease !important;
+}
+
+.pf-v6-c-button.pf-m-primary:hover, .pf-c-button.pf-m-primary:hover {
+    background: var(--adwaita-blue-active) !important;
+    border-color: var(--adwaita-blue-active) !important;
+}
+
+/* Clean Modern Links */
+a, .pf-v6-c-button.pf-m-link, .pf-c-button.pf-m-link {
+    color: var(--adwaita-blue) !important;
+    text-decoration: none !important;
+}
+
+a:hover, .pf-v6-c-button.pf-m-link:hover, .pf-c-button.pf-m-link:hover {
+    color: var(--adwaita-blue-light) !important;
+    text-decoration: underline !important;
+}
+
+button.pf-v6-c-button.pf-m-link.pf-m-inline,
+.pf-m-link.pf-m-inline {
+    text-decoration: none !important;
+    border-bottom: 1px dotted rgba(53, 132, 228, 0.45) !important;
+}
+
+button.pf-v6-c-button.pf-m-link.pf-m-inline:hover,
+.pf-m-link.pf-m-inline:hover {
+    border-bottom: 1px solid var(--adwaita-blue-light) !important;
+}
+
+/* Dropdowns, Menus & Popovers */
+.pf-v6-c-menu, .pf-c-menu,
+.pf-v6-c-dropdown__menu, .pf-c-dropdown__menu,
+.pf-v6-c-popover__content, .pf-c-popover__content {
+    background: var(--adwaita-card-bg) !important;
+    border: 1px solid var(--adwaita-border) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4) !important;
+    color: var(--adwaita-font) !important;
+}
+
+.pf-v6-c-menu__item, .pf-c-dropdown__menu-item {
+    color: var(--adwaita-font) !important;
+    border-radius: 6px !important;
+}
+
+.pf-v6-c-menu__item:hover, .pf-c-dropdown__menu-item:hover {
+    background-color: rgba(53, 132, 228, 0.18) !important;
+    color: #ffffff !important;
+}
+
+/* Tables & Lists */
+.pf-v6-c-table, .pf-c-table,
+.pf-v6-c-data-list, .pf-c-data-list {
+    background: transparent !important;
+    color: var(--adwaita-font) !important;
+}
+
+.pf-v6-c-table tr, .pf-c-table tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+.pf-v6-c-table tr:hover, .pf-c-table tr:hover {
+    background: rgba(255, 255, 255, 0.03) !important;
+}

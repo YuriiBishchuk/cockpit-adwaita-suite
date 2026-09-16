@@ -1,0 +1,10 @@
+{
+    "version": 0,
+    "menu": {
+        "sensors": {
+            "label": "Sensors",
+            "path": "index.html",
+            "order": 65
+        }
+    }
+}

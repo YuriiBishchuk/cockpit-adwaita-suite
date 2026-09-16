@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hardware Sensors</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../../static/branding.css" rel="stylesheet" />
+    <link href="../../static/css-overrides.css" type="text/css" rel="stylesheet" />
+    <link href="app.css" type="text/css" rel="stylesheet" />
+    <script src="../base1/cockpit.js"></script>
+</head>
+<body>
+    <div class="sensors-container">
+        <!-- Header -->
+        <header class="sensors-header">
+            <div class="header-left">
+                <h1>🌡️ Hardware Sensors & Temperatures</h1>
+                <p class="subtitle">Real-time hardware telemetry (NVMe, CPU, GPU, Wi-Fi)</p>
+            </div>
+            <div class="header-right">
+                <div class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    <span>Live (1s)</span>
+                </div>
+                <button id="btn-refresh" class="btn-refresh">🔄 Refresh</button>
+            </div>
+        </header>
+
+        <!-- Top Stat Mini Cards -->
+        <div id="quick-metrics" class="quick-metrics-grid"></div>
+
+        <!-- Material Table Card -->
+        <div class="table-card">
+            <div class="table-card-header">
+                <h2>Sensor Diagnostics</h2>
+                <span id="last-updated" class="last-updated">Updated: --:--:--</span>
+            </div>
+            <div class="table-responsive">
+                <table class="material-table">
+                    <thead>
+                        <tr>
+                            <th class="col-device">Component</th>
+                            <th class="col-sensor">Sensor Zone</th>
+                            <th class="col-temp">Temperature</th>
+                            <th class="col-limit">Critical</th>
+                            <th class="col-status">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="sensors-table-body">
+                        <tr>
+                            <td colspan="5" class="loading-state">Loading sensor metrics...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
