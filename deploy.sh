@@ -120,6 +120,7 @@ deploy_local() {
             sudo cp "$SCRIPT_DIR/theme/css-overrides.css" "$THEME_DEST/branding/suse/css-overrides.css"
             sudo cp "$SCRIPT_DIR/theme/css-overrides.css" "$THEME_DEST/branding/suse/branding.css"
             sudo cp "$SCRIPT_DIR/theme/css-overrides.css" "$THEME_DEST/static/css-overrides.css"
+            sudo chown -R "$USER:$USER" "$THEME_DEST" 2>/dev/null || true
         else
             mkdir -p "$THEME_DEST/branding/suse" "$THEME_DEST/static"
             cp "$SCRIPT_DIR/theme/css-overrides.css" "$THEME_DEST/branding/suse/css-overrides.css"
