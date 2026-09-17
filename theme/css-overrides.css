@@ -256,3 +256,98 @@ button.pf-v6-c-button.pf-m-link.pf-m-inline:hover,
 .pf-v6-c-table tr:hover, .pf-c-table tr:hover {
     background: rgba(255, 255, 255, 0.03) !important;
 }
+
+/* Custom Desktop Scrollbars (Matching Navigator & Modern GNOME) */
+* {
+    scrollbar-width: thin !important;
+    scrollbar-color: #33333d #16161a !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: #16161a !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #33333d !important;
+    border-radius: 4px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #474755 !important;
+}
+
+/* Form Controls, Search Inputs & Filter Selects */
+.pf-v6-c-form-control, .pf-c-form-control,
+.pf-v6-c-form-control input, .pf-c-form-control input,
+.pf-v6-c-text-input-group,
+input[type="text"], input[type="search"], select {
+    background-color: #1c1c22 !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    color: var(--adwaita-font) !important;
+    border-radius: 10px !important;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+.pf-v6-c-form-control:focus, .pf-c-form-control:focus,
+.pf-v6-c-text-input-group:focus-within,
+input[type="text"]:focus, input[type="search"]:focus, select:focus {
+    border-color: var(--adwaita-blue) !important;
+    box-shadow: 0 0 0 2px rgba(53, 132, 228, 0.25) !important;
+    outline: none !important;
+}
+
+/* Modals & Dialogs (Adwaita Blur & Depth) */
+.pf-v6-c-backdrop, .pf-c-backdrop {
+    background-color: rgba(0, 0, 0, 0.65) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.pf-v6-c-modal-box, .pf-c-modal-box {
+    background-color: var(--adwaita-card-bg) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.55) !important;
+    color: var(--adwaita-font) !important;
+}
+
+.pf-v6-c-modal-box__title, .pf-c-modal-box__title {
+    color: var(--adwaita-font) !important;
+    font-weight: 600 !important;
+}
+
+/* Logs Page (Journal Entries & Timeline) */
+.ct-log-list, .ct-log-list .pf-v6-c-data-list, .ct-log-list .pf-c-data-list {
+    background: transparent !important;
+}
+
+.ct-log-list .pf-v6-c-data-list__item,
+.ct-log-list .pf-c-data-list__item,
+.ct-log-list .ct-log-item {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+    transition: background 0.15s ease !important;
+}
+
+.ct-log-list .pf-v6-c-data-list__item:hover,
+.ct-log-list .pf-c-data-list__item:hover,
+.ct-log-list .ct-log-item:hover {
+    background-color: rgba(255, 255, 255, 0.035) !important;
+}
+
+/* Log Monospace Timestamps & Identifiers */
+.ct-log-list time, .ct-log-list .ct-log-time, .ct-log-list code {
+    font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+    font-size: 0.875rem !important;
+    color: var(--adwaita-font-muted) !important;
+}
+
+/* Badges & Status Labels */
+.pf-v6-c-label, .pf-c-label, .pf-v6-c-badge, .pf-c-badge {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
