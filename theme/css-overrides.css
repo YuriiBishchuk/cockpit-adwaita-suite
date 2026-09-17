@@ -242,19 +242,84 @@ button.pf-v6-c-button.pf-m-link.pf-m-inline:hover,
     color: #ffffff !important;
 }
 
-/* Tables & Lists */
+/* Seamless Organic Tables & Key-Value Lists */
 .pf-v6-c-table, .pf-c-table,
-.pf-v6-c-data-list, .pf-c-data-list {
+.pf-v6-c-table tbody, .pf-c-table tbody,
+.pf-v6-c-table tr, .pf-c-table tr,
+.pf-v6-c-table td, .pf-c-table td,
+.pf-v6-c-table th, .pf-c-table th,
+.pf-v6-c-card .pf-v6-c-table,
+.pf-v6-c-card__body .pf-v6-c-table {
     background: transparent !important;
+    background-color: transparent !important;
+    --pf-v6-c-table--BackgroundColor: transparent !important;
+    --pf-v6-c-table__tbody--BackgroundColor: transparent !important;
+    --pf-v6-c-table__tr--BackgroundColor: transparent !important;
+    --pf-v6-c-table--cell--BackgroundColor: transparent !important;
+    color: var(--adwaita-font) !important;
+    border: none !important;
+    border-top: none !important;
+}
+
+/* Subtle row separators that blend with the card */
+.pf-v6-c-table tr, .pf-c-table tr,
+.pf-v6-c-table td, .pf-c-table td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+
+/* Last row has no bottom border */
+.pf-v6-c-table tr:last-child, .pf-c-table tr:last-child,
+.pf-v6-c-table tr:last-child td, .pf-c-table tr:last-child td {
+    border-bottom: none !important;
+}
+
+/* Hover on table rows */
+.pf-v6-c-table tr:hover, .pf-c-table tr:hover {
+    background: rgba(255, 255, 255, 0.025) !important;
+}
+
+/* First column (Keys / Labels: Hostname, System time, etc.) */
+.pf-v6-c-table td:first-child, .pf-c-table td:first-child,
+.pf-v6-c-table th:first-child, .pf-c-table th:first-child {
+    color: var(--adwaita-font-muted) !important;
+    font-weight: 500 !important;
+}
+
+/* Second column (Values) */
+.pf-v6-c-table td:last-child, .pf-c-table td:last-child {
     color: var(--adwaita-font) !important;
 }
 
-.pf-v6-c-table tr, .pf-c-table tr {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+/* Clean up ugly dotted underlines on interactive links/buttons in tables */
+.pf-v6-c-table button,
+.pf-v6-c-table a,
+.pf-v6-c-table .pf-v6-c-button.pf-m-link,
+.pf-v6-c-table .pf-m-link.pf-m-inline,
+.pf-v6-c-card button.pf-v6-c-button.pf-m-link.pf-m-inline,
+.pf-v6-c-card .pf-m-link.pf-m-inline {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    color: var(--adwaita-blue) !important;
 }
 
-.pf-v6-c-table tr:hover, .pf-c-table tr:hover {
-    background: rgba(255, 255, 255, 0.03) !important;
+.pf-v6-c-table button:hover,
+.pf-v6-c-table a:hover,
+.pf-v6-c-table .pf-v6-c-button.pf-m-link:hover,
+.pf-v6-c-table .pf-m-link.pf-m-inline:hover,
+.pf-v6-c-card button.pf-v6-c-button.pf-m-link.pf-m-inline:hover,
+.pf-v6-c-card .pf-m-link.pf-m-inline:hover {
+    color: var(--adwaita-blue-light) !important;
+    text-decoration: underline !important;
+    border-bottom: none !important;
+}
+
+/* Remove awkward top boundary inside card bodies */
+.pf-v6-c-card__body, .pf-c-card__body {
+    background: transparent !important;
+    padding-top: 6px !important;
 }
 
 /* Custom Desktop Scrollbars (Matching Navigator & Modern GNOME) */
